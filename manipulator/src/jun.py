@@ -17,25 +17,19 @@ C_3 = np.cos(theta_3)
 C_4 = np.cos(theta_4)
 
 
+
 S_1 = np.sin(theta_1)
 S_2 = np.sin(theta_2)
 S_3 = np.sin(theta_3)
 S_4 = np.sin(theta_4)
 
-#       C_1( Z_1 +( S_2 + S_3*(Z_3+S_4 * Z_4) ) )
-# P_r=  S_1( Z_1 + (S_2 * (Z_2 + S_3*(Z_3 + S_4 * Z_4) )))
-#       Z_1+C_2(Z_2+C_3(Z_3+C_4*Z_4))
+
+
 P_r = np.empty([1,3])
 
-#P_r[0,1] = C_1*( S_2*( l_2 + S_3*(l_3+S_4 * l_4) ) )
 
-#P_r[0,2] = S_1( (S_2 * (l_2 + S_3*(l_3 + S_4 * l_4) )))
-
-#P_r[0,3] = l_1+C_2(l_2+C_3(l_3+C_4*l_4))
-P_r[0,0] =C_1*( S_2*( l_2 + S_3*(l_3+S_4 * l_4) ) )
-
-P_r[0,1] = S_1*(  (S_2 * (l_2 + S_3*(l_3 + S_4 * l_4) )))
-
-P_r[0,2] = l_1+C_2*(l_2+C_3*(l_3+C_4*l_4))
+P_r[0,0] =C_1*S_2*l_2+C_1*np.sin(theta_2 + theta_3)*l_3 + C_1*np.sin(theta_2+theta_3+theta_4)*l_4
+P_r[0,1] = S_1*S_2*l_2 + S_1*np.sin(theta_2+theta_3)*l_3+S_1*np.sin(theta_2+theta_3+theta_4)*l_4
+P_r[0,2] = l_1*C_2 + np.cos(theta_2+theta_3)*l_3 +np.cos(theta_2+theta_3 + theta_4)*l_4
 
 print(P_r)
